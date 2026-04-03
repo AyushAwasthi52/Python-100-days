@@ -2,13 +2,14 @@ from turtle import Turtle
 ALIGNMENT = "center"
 FONT = ("Courier", 24, "normal")
 
-
 class Scoreboard(Turtle):
 
     def __init__(self):
         super().__init__()
         self.score = 0
         self.high_score = 0
+        with open("Snake_Game/High_Score.txt") as file:
+            self.high_score = int(file.read())
         self.color("white")
         self.penup()
         self.goto(0, 270)
@@ -28,6 +29,8 @@ class Scoreboard(Turtle):
             self.high_score = self.score
         self.score = 0
         self.update_scoreboard()
+        with open("Snake_Game/High_Score.txt", "w") as file:
+            file.write(f"{self.high_score}")
 
     def increase_score(self):
         self.score += 1
